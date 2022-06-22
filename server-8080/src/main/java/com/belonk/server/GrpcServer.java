@@ -36,11 +36,13 @@ public class GrpcServer {
 		// 添加关闭服务器的回调，将server(socket)关闭掉...
 		Runtime.getRuntime().addShutdownHook(new Thread(this::stop));
 		log.info("rpc server started on port: {}", rpcPort);
+
 		this.server.awaitTermination();
 	}
 
 	public void stop() {
 		if (this.server != null) {
+			log.info("rpc server shutdown...");
 			this.server.shutdown();
 		}
 	}
